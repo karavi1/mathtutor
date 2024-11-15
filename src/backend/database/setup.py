@@ -1,6 +1,16 @@
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, insert
 
-engine = create_engine('postgresql://localhost/mathtutordb')
+# Load environment variables from .env file
+load_dotenv()
+env = {
+    'username': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'name': os.getenv('DB_NAME')
+}
+
+engine = create_engine(f"postgresql://{env['username']}:{env['password']}@localhost/{env['name']}")
 meta = MetaData()
 
 
