@@ -13,8 +13,6 @@ env = {
 engine = create_engine(f"postgresql://{env['username']}:{env['password']}@localhost/{env['name']}", echo=True)
 
 def get_resources(topics: list) -> list:
-    # TODO: (suggestion) change function input to python list and change condition logic to "fetchall if row[1] in topics"
-    #       The idea being that we can retrieve data for all the topics we want in a single query
     with engine.connect() as conn:
         output = conn.execute(text('SELECT * FROM public.resources'))
 
